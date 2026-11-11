@@ -16,7 +16,12 @@ const main = async (prompt: string): Promise<void> => {
   while (true) {
     const result = await LLM(messages);
     const toolCalls = result.message.tool_calls;
-
+    console.log("Result Choice [0]", result);
+    console.log("--------------------------");
+    console.log("Result Messages", result.message);
+    console.log("Result Finish Reasone", result.finish_reason);
+   console.log("Result Function ", result.message.tool_calls);
+   
     if (toolCalls?.length) {
       messages.push(result.message);
       console.log("Tool Call Needed");
@@ -54,7 +59,7 @@ const main = async (prompt: string): Promise<void> => {
   }
 };
 
-const prompt = "Compare Canva and Microsoft";
+const prompt = "what is the stock price of Onlyfans";
 main(prompt).catch((error: unknown) => {
   console.error("Stock checker failed:", error);
   process.exitCode = 1;
